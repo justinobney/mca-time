@@ -1,40 +1,71 @@
 angular.module("app").controller('HomeController', function($scope, $location, AuthenticationService) {
-  $scope.title = "Home";
+    $scope.title = "Home";
 
-  $scope.messages = [
-    {
-        me: true,
-        name: 'Jack Sparrow',
-        time: '12 mins ago',
-        body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.',
-        img: 'http://placehold.it/50/FA6F57/fff&text=ME'
-    },
-    {
-        name: 'Bhaumik Patel',
-        time: '12 mins ago',
-        body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.',
-        img: 'http://placehold.it/50/55c1e7/fff&text=U'
-    },
-    {
-        name: 'Bhaumik Patel',
-        time: '12 mins ago',
-        body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.',
-        img: 'http://placehold.it/50/55c1e7/fff&text=U'
-    },
-    {
-        me: true,
-        name: 'Jack Sparrow',
-        time: '12 mins ago',
-        body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.',
-        img: 'http://placehold.it/50/FA6F57/fff&text=ME'
-    }
-  ];
+    var studentWeekEntries = [
+        {
+            id: 1,
+            clockCode: 1234,
+            firstName: 'Neil',
+            lastName: 'Smith',
+            timeRecords: [{
+                id: 1,
+                date: '11-15-2013',
+                timeIn: '8: 00 am',
+                timeOut: '11: 00 am',
+                isValid: true,
+                staged: true,
+                published: false
+            }, {
+                id: 2,
+                date: '11-16-2013',
+                timeIn: '8: 30 am',
+                timeOut: '12: 45 am',
+                isValid: false,
+                staged: true,
+                published: false
+            }]
+        },
+        {
+            id: 2,
+            clockCode: 1234,
+            firstName: 'Neil',
+            lastName: 'Smith',
+            timeRecords: [{
+                id: 3,
+                date: '11-15-2013',
+                timeIn: '8: 00 am',
+                timeOut: '11: 00 am',
+                isValid: true,
+                staged: true,
+                published: false
+            }, {
+                id: 4,
+                date: '11-16-2013',
+                timeIn: '8: 30 am',
+                timeOut: '12: 45 am',
+                isValid: false,
+                staged: true,
+                published: false
+            }]
+        }
 
-  var onLogoutSuccess = function(response) {
-    $location.path('/login');
-  };
+    ];
 
-  $scope.logout = function() {
-    AuthenticationService.logout().success(onLogoutSuccess);
-  };
+    $scope.weekEntries = _.map(studentWeekEntries, function(student){
+        return _.map(student.timeRecords, function(timeRecord){
+            return {
+                student: student.id,
+                name: student.firstName + student.lastName,
+                timeRecord: timeRecord
+            };
+        })
+    }).concat
+
+    var onLogoutSuccess = function(response) {
+        $location.path('/login');
+    };
+
+    $scope.logout = function() {
+        AuthenticationService.logout().success(onLogoutSuccess);
+    };
 });
