@@ -1,158 +1,46 @@
 <!-- Main component for a primary marketing message or call to action -->
-<div class="row">
+
+<div class="row" data-ng-controller="HomeController">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="btn-group">
+            <button type="button" class="btn btn-default" ng-click="prev()">
+                <i class="fa fa-chevron-left"></i>
+            </button>
+            <button type="button" class="btn btn-default" ng-click="next()">
+                <i class="fa fa-chevron-right"></i>
+            </button>
+            <strong>{{weekStart}} - {{weekEnd}}</strong>
+            Today is {{today}}
+        </div>
+    </div>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="panel panel-default">
             <!-- Table -->
             <table class="table time-entry">
                 <thead>
                     <tr>
-                        <th>
-                            Monday - 11/5</span>
-                        </th>
-                        <th>Tuesday - 11/6</span>
-                        </th>
-                        <th>Wednesday - 11/7</span>
-                        </th>
-                        <th>Thursday - 11/8</span>
-                        </th>
-                        <th>Friday - 11/9</span>
+                        <th ng-repeat="date in range" width="20%">
+                            <span>{{date}}</span>
                         </th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>
+                        <td ng-repeat="date in range" width="20%">
                             <div class="panel panel-info">
                                 <div class="panel-heading">
                                     <h3 class="panel-title">Panel title</h3>
                                 </div>
                                 <div class="panel-body">
-                                    <div class="well">
-                                        12 hours
-                                    </div>
-                                    <div class="well">
-                                        12 hours
-                                    </div>
-                                    <div class="well">
-                                        12 hours
-                                    </div>
-                                    <div class="well">
-                                        12 hours
-                                    </div>
-                                    <div class="well">
-                                        12 hours
-                                    </div>
-                                    <button type="button" class="btn btn-success btn-block">
-                                        <i class="fa fa-checkl"></i>
-                                        Approve Time
-                                    </button>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="panel panel-info">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title">Panel title</h3>
-                                </div>
-                                <div class="panel-body">
-                                    <div class="well">
-                                        12 hours
-                                    </div>
-                                    <div class="well">
-                                        12 hours
-                                    </div>
-                                    <div class="well">
-                                        12 hours
-                                    </div>
-                                    <div class="well">
-                                        12 hours
-                                    </div>
-                                    <div class="well">
-                                        12 hours
-                                    </div>
-                                    <button type="button" class="btn btn-success btn-block">
-                                        <i class="fa fa-checkl"></i>
-                                        Approve Time
-                                    </button>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="panel panel-info">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title">Panel title</h3>
-                                </div>
-                                <div class="panel-body">
-                                    <div class="well">
-                                        12 hours
-                                    </div>
-                                    <div class="well">
-                                        12 hours
-                                    </div>
-                                    <div class="well">
-                                        12 hours
-                                    </div>
-                                    <div class="well">
-                                        12 hours
-                                    </div>
-                                    <div class="well">
-                                        12 hours
-                                    </div>
-                                    <button type="button" class="btn btn-success btn-block">
-                                        <i class="fa fa-checkl"></i>
-                                        Approve Time
-                                    </button>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="panel panel-info">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title">Panel title</h3>
-                                </div>
-                                <div class="panel-body">
-                                    <div class="well">
-                                        12 hours
-                                    </div>
-                                    <div class="well">
-                                        12 hours
-                                    </div>
-                                    <div class="well">
-                                        12 hours
-                                    </div>
-                                    <div class="well">
-                                        12 hours
-                                    </div>
-                                    <div class="well">
-                                        12 hours
-                                    </div>
-                                    <button type="button" class="btn btn-success btn-block">
-                                        <i class="fa fa-checkl"></i>
-                                        Approve Time
-                                    </button>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="panel panel-info">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title">Panel title</h3>
-                                </div>
-                                <div class="panel-body">
-                                    <div class="well">
-                                        12 hours
-                                    </div>
-                                    <div class="well">
-                                        12 hours
-                                    </div>
-                                    <div class="well">
-                                        12 hours
-                                    </div>
-                                    <div class="well">
-                                        12 hours
-                                    </div>
-                                    <div class="well">
-                                        12 hours
+                                    <div class="alert alert-info" ng-repeat="record in getEntries(date)">
+                                        <strong>Student:</strong><br>
+                                        {{record.name}}
+                                        <br>
+                                        <strong>Time In:</strong><br>
+                                        {{record.timeRecord.timeIn}}
+                                        <br>
+                                        <strong>Time Out:</strong><br>
+                                        {{record.timeRecord.timeOut}}
                                     </div>
                                     <button type="button" class="btn btn-success btn-block">
                                         <i class="fa fa-checkl"></i>

@@ -48,18 +48,54 @@ angular.module("app").controller('HomeController', function($scope, $location, A
                 published: false
             }]
         }
-
     ];
 
-    $scope.weekEntries = _.map(studentWeekEntries, function(student){
+    $scope.currentDay = Date.today();
+    $scope.today = $scope.currentDay.toString("dddd - MM/dd");
+
+    var bindValues = function(){
+        $scope.range = [];
+        var marker = $scope.currentDay.clone();
+        var start = ((marker.is().monday()) ? marker : marker.previous().monday());
+        var end = marker.clone().next().friday();
+
+        $scope.weekStart = start.toString("dddd - MM/dd");
+        $scope.weekEnd = end.toString("dddd - MM/dd");
+
+        var cur = start.clone();
+
+        while(cur.between(start, end)){
+            $scope.range.push(cur.clone().toString('MM-dd-yyyy'));
+            cur.addDays(1);
+        }
+    };
+
+    $scope.prev = function(){
+        $scope.currentDay = $scope.currentDay.addDays(-7);
+        bindValues();
+    };
+
+    $scope.next = function(){
+        $scope.currentDay = $scope.currentDay.addDays(7);
+        bindValues();
+    };
+
+    $scope.getEntries = function(date){
+        return $scope.weekEntries[date];
+    };
+
+    bindValues();
+
+    $scope.weekEntries = _.chain(studentWeekEntries).map(function(student){
         return _.map(student.timeRecords, function(timeRecord){
             return {
                 student: student.id,
-                name: student.firstName + student.lastName,
+                name: student.firstName + ' ' + student.lastName,
+                date: timeRecord.date,
                 timeRecord: timeRecord
             };
-        })
-    }).concat
+        });
+    }).flatten().groupBy('date').value();
 
     var onLogoutSuccess = function(response) {
         $location.path('/login');

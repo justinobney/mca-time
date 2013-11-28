@@ -22,8 +22,7 @@ angular.module("app").config(function($stateProvider, $locationProvider, $urlRou
       "home-content": {
         templateUrl: 'js/home/home.index.html',
       }
-    },
-    controller: 'HomeController'
+    }
   });
 
   $stateProvider.state('listOfBooks', {
