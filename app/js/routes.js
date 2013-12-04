@@ -26,7 +26,7 @@ angular.module("app").config(function($stateProvider, $locationProvider, $urlRou
   });
 
   $stateProvider.state('listOfBooks', {
-    url: '/ist-of-books',
+    url: '/list-of-books',
     templateUrl: 'js/books/books.html',
     controller: 'BooksController'
   });
